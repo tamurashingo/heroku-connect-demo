@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <th:block th:insert="fragments/base :: header"></th:block>
+</head>
+<body>
+  <div class="container-fluid">
+    <h4>MyBatis App</h4>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>name</th>
+          <th>done</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="task : ${page}" th:object="${task}">
+          <td th:text="*{id}"></td>
+          <td th:text="*{name}"></td>
+          <td th:text="*{done}"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <th:block th:insert="fragments/base :: scripts"></th:block>
+</body>
+</html>

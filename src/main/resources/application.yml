@@ -1,0 +1,57 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    initialization-mode: never
+  profiles:
+    active: local
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+
+---
+# local development
+spring:
+  config:
+    activate:
+      on-profile: local
+  datasource:
+    url: jdbc:postgresql://localhost:5432/herokuconn
+    username: root
+    password: password
+flyway:
+  enabled: true
+  url: jdbc:postgresql://localhost:5432/herokuconn
+  user: root
+  password: password
+  baseline-on-migrate: true
+  baseline-version: 1.0.0
+  baseline-description: Initial
+  locations: classpath:db/migration
+
+
+---
+# run on docker
+spring:
+  config:
+    activate:
+      on-profile: docker
+  datasource:
+    url: jdbc:postgresql://dbserver/herokuconn
+    username: root
+    password: password
+
+---
+# run on heroku
+spring:
+  config:
+    activate:
+      on-profile: heroku
+  datasource:
+    maxActive: 10
+    maxIdle: 5
+    minIdle: 2
+    initialSize: 5
+    removeAbandoned: true
+    url: ${JDBC_DATABASE_URL}
+    username: ${JDBC_DATABASE_USERNAME}
+    password: ${JDBC_DATABASE_PASSWORD}
