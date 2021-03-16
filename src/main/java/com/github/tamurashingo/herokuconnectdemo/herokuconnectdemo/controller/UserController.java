@@ -5,10 +5,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class HelloController {
-    @GetMapping("/hello")
-    public String hello(Model model) {
-        model.addAttribute("message", "hello world");
-        return "hello";
+public class UserController {
+
+    @GetMapping("/user")
+    public String getAllUsers(Model model) {
+        return "user";
     }
 }

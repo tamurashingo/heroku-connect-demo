@@ -6,14 +6,15 @@
 </head>
 <body>
   <div class="container-fluid">
-    <h4>MyBatis App</h4>
+    <h4>Task一覧</h4>
 
-    <table class="table">
+    <table th:if="${page.size > 0}" class="table">
       <thead>
         <tr>
           <th>#</th>
           <th>name</th>
           <th>done</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -21,9 +22,32 @@
           <td th:text="*{id}"></td>
           <td th:text="*{name}"></td>
           <td th:text="*{done}"></td>
+          <td class="py-1">
+            <a th:href="@{/edit/{id}(id=*{id})}"
+               class="btn btn-outline-primary">
+              <i class="fa fa-pencil"></i>
+              編集
+            </a>
+
+            <a th:href="@{/delete/{id}(id=*{id})}"
+               class="btn btn-outline-danger">
+              <i class="fa fa-trash"></i>
+              削除
+            </a>
+          </td>
         </tr>
       </tbody>
     </table>
+
+    <div class="row">
+      <div class="col-auto mr-auto">
+        <a th:href="@{/add}"
+           class="btn btn-outline-primary">
+          <i class="fa fa-plus"></i>
+          新規追加
+        </a>
+      </div>
+    </div>
   </div>
 
   <th:block th:insert="fragments/base :: scripts"></th:block>
