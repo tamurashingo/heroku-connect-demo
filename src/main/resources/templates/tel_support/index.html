@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http:/www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <th:block th:insert="fragments/base :: header"></th:block>
+</head>
+<body>
+  <div class="container-fluid">
+    <h4>電話予約</h4>
+
+    <table th:if="${reservations.size > 0}" class="table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>空き状況</th>
+          <th>種別</th>
+          <th>サポート開始日時</th>
+          <th>サポート終了日時</th>
+          <th>予約した人</th>
+          <th>予約した日時</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="reservation : ${reservations}" th:object="${reservation}">
+          <td th:text="*{externalId}"></td>
+          <td th:text="*{emptyStatus}"></td>
+          <td th:text="*{startDatetime}"></td>
+          <td th:text="*{endDatetime}"></td>
+          <td th:text="*{reservationCustomer}"></td>
+          <td th:text="*{reservationDatetime}"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="row">
+    <div class="col-auto mr-auto">
+      <a th:href="@{/tel_support/add}"
+         class="btn btn-outline-primary">
+        <i class="fa fa-plus"></i>
+        予約枠の追加
+      </a>
+    </div>
+  </div>
+  <th:block th:insert="fragments/base :: scripts"></th:block>
+</body>
+</html>

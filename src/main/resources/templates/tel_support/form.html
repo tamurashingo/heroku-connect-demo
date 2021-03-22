@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <th:block th:insert="fragments/base :: header"></th:block>
+</head>
+<body>
+  <div class="container-fluid">
+    <div class="alert alert-danger" th:if="${error_message != null && !error_message.empty}" role="alert">
+      <p th:text="${error_message}"></p>
+    </div>
+    <h4>予約枠の作成</h4>
+    <form th:action="@{/tel_support/process}" th:object="${telSupportReservationForm}" method="post" novalidate>
+      <div class="form-group">
+        <label for="targetDate">枠を作成する日付</label>
+        <input type="date" th:errorclass="is-invalid" th:field="*{targetDate}">
+        <div class="invalid-feedback" th:errors="*{targetDate}"></div>
+      </div>
+      <div class="form-group">
+        <label for="startDate">サポート開始時刻</label>
+        <input type="time" th:errorclass="is-invalid" th:field="*{startDate}">
+        <div class="invalid-feedback" th:errors="*{startDate}"></div>
+      </div>
+      <div class="form-group">
+        <label for="endDate">サポート終了時刻</label>
+        <input type="time" th:errorclass="is-invalid" th:field="*{endDate}">
+        <div class="invalid-feedback" th:errors="*{endDate}"></div>
+      </div>
+      <div class="form-group">
+        <label for="minutes">1枠の時間</label>
+        <input type="text" th:errorclass="is-invalid" th:field="*{minutes}">
+        <div class="invalid-feedback" th:errors="*{minutes}"></div>
+      </div>
+
+      <button type="submit" class="btn btn-outline-primary px-5">
+        <i class="fa fa-file"></i>
+        作成
+      </button>
+    </form>
+  </div>
+
+  <th:block th:insert="fragments/base :: scripts"></th:block>
+</body>
+</html>
