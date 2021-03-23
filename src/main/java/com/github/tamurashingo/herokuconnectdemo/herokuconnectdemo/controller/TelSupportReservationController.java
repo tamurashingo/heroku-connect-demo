@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@RequestMapping("/tel_support")
+@RequestMapping("tel_support")
 @Controller
 public class TelSupportReservationController {
 
@@ -27,12 +27,12 @@ public class TelSupportReservationController {
         return "tel_support/index";
     }
 
-    @GetMapping("/add")
+    @GetMapping("add")
     public String addReservation(@ModelAttribute TelSupportReservationForm form) {
         return "tel_support/form";
     }
 
-    @PostMapping("/process")
+    @PostMapping("process")
     public String process(@Validated @ModelAttribute TelSupportReservationForm form, BindingResult result, Model model) throws Exception {
         if (result.hasErrors()) {
             return "tel_support/form";
