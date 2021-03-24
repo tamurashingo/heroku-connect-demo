@@ -28,7 +28,6 @@ spring:
     baseline-description: Initial
     schemas:
       - public
-      - salesforce
     locations:
       - classpath:db/migration
       - classpath:db/heroku
